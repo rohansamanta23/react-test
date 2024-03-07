@@ -7,28 +7,12 @@ function App() {
     email: ""
   });
   function eventHandel(event){
-    const val = event.target.value;
-    const name = event.target.name;
+    const {name,value} = event.target;
     setContact(preVal=>{
-        if(name === "fName"){
-            return {
-                fName:val,
-                lName:preVal.lName,
-                email:preVal.email
-            };
-        } else if(name === "lName"){
-            return {
-                fName:preVal.fName,
-                lName:val,
-                email:preVal.email
-            };
-        } else if(name === "email"){
-            return {
-                fName:preVal.fName,
-                lName:preVal.lName,
-                email:val
-            };
-        }
+        return{
+          ...preVal,
+          [name]:value
+        };
     });
   }
   return (

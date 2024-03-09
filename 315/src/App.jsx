@@ -1,5 +1,5 @@
 import React from "react";
-import Li from './Li';
+import ToDoItem from './ToDoItem';
 function App() {
   const [toDo,setToDo] = React.useState("");
   const [list,setList] = React.useState([]);
@@ -15,6 +15,13 @@ function App() {
     }
     setToDo("");
   }
+  function handleDelete(id){
+    setList(pre=>{
+      return pre.filer((item,index)=>{
+        return index !== id;
+      });
+    })
+  }
   return (
     <div className="container">
       <div className="heading">
@@ -28,8 +35,8 @@ function App() {
       </div>
       <div>
         <ul>
-          {list.map(li=>{
-            return <Li msg={li}/>;
+          {list.map((li,index)=>{
+            return <ToDoItem msg={li} delete={handleDelete} key={index} id={index}/>;
           })}
         </ul>
       </div>

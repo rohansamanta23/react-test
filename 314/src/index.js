@@ -1,16 +1,19 @@
 import React,{StrictMode} from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import App from "./components/App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<StrictMode><App/></StrictMode>);
 
-//CHALLENGE: Make the code in App.jsx work.
-//The final app should have a single contact
-//with fName, lName and email.
+//CHALLENGE: I have extracted the Input Area, including the <input> and
+//<button> elements into a seperate Component called InputArea.
+//Your job is to make the app work as it did before but this time with the
+//InputArea as a seperate Component.
 
-//HINT: You'll need to apply the following things you learnt:
-//1. Using JS Objects with state.
-//2. Making use of previous state when changing state.
-//3. Working with forms in React.
-//4. Handing events
+// DO NOT: Modify the ToDoItem.jsx
+// DO NOT: Move the input/button elements back into the App.jsx
+
+//Hint 1: You will need to think about how to manage the state of the input element
+//in InputArea.jsx.
+//Hint 2: You will need to think about how to pass the input value back into
+//the addItem() function in App.jsx.

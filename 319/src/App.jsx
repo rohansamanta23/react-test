@@ -1,32 +1,41 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 
 function App() {
-  const [notes,setNotes] = useState([]);
-  function notesHandel(newNote){
-    setNotes(preval=>{
-      return [...preval,newNote];
+  const [notes, setNotes] = useState([]);
+
+  function addNote(newNote) {
+    setNotes(prevNotes => {
+      return [...prevNotes, newNote];
     });
   }
 
-  function handelDelete(id){
-    setNotes(preVal=>{
-      return preVal.filter((item,index)=>{
-        return (index!=id);
-      })
-    })
+  function deleteNote(id) {
+    setNotes(prevNotes => {
+      return prevNotes.filter((noteItem, index) => {
+        return index !== id;
+      });
+    });
   }
-  function createNote(curNote,index){
-    return <Note key={index} id={index} delete={handelDelete} title={curNote.title} content={curNote.content}/>
-  }
+
   return (
     <div>
       <Header />
-      <CreateArea add={notesHandel}/>
-        {notes.map(createNote)}
+      <CreateArea onAdd={addNote} />
+      {notes.map((noteItem, index) => {
+        return (
+          <Note
+            key={index}
+            id={index}
+            title={noteItem.title}
+            content={noteItem.content}
+            onDelete={deleteNote}
+          />
+        );
+      })}
       <Footer />
     </div>
   );

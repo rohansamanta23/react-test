@@ -1,31 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Zoom from '@mui/material/Zoom';
 
 function CreateArea(props) {
-  const [data,setData] = React.useState({
-    title:"",
-    content:""
+  const [note, setNote] = useState({
+    title: "",
+    content: ""
   });
-  function handelChange(event){
-    const {name,value} = event.target;
-    setData(perVal=>{
-      return{
-          ...perVal,
-          [name]:value
-    }});
+  const [pop,setPop] = useState(false);
+
+  function handelPopUp(){
+    setPop(true);
   }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        [name]: value
+      };
+    });
+  }
+
+  function submitNote(event) {
+    props.onAdd(note);
+    setNote({
+      title: "",
+      content: ""
+    });
+    event.preventDefault();
+  }
+
   return (
     <div>
-      <form>
-        <input onChange={handelChange} name="title" placeholder="Title" value={data.title} />
-        <textarea onChange={handelChange} name="content" placeholder="Take a note..." rows="3" value={data.content} />
-        <button onClick={(e) => {
-          e.preventDefault();
-          props.add(data);
-          setData({
-            title:"",
-            content:""
-          })
-        }}>Add</button>
+      <form onClick={handelPopUp} className="create-note">
+        {pop&&<input
+          name="title"
+          onChange={handleChange}
+          value={note.title}
+          placeholder="Title"
+        />}
+        <textarea
+          name="content"
+          onChange={handleChange}
+          value={note.content}
+          placeholder="Take a note..."
+          rows={pop?"3":"1"}
+        />
+        {pop&&<Zoom in={pop}>
+          <Fab onClick={submitNote}>
+            <AddIcon/>
+          </Fab>
+        </Zoom>}
+        
       </form>
     </div>
   );

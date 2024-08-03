@@ -2,7 +2,7 @@ import React from "react";
 
 function App() {
   const [currentColor,setCurrentColor] = React.useState('white');
-  let btnColors = ["red","green","blue","olive","gray","yellow","pink","purple","lavender","white","black"];
+  let btnColors = ["Red","Green","Blue","Olive","Gray","Yellow","Pink","Purple","Lavender","White","Black"];
   function handelColor(color) {
     setCurrentColor(color)
   }
@@ -15,7 +15,7 @@ function App() {
               onClick={() => handelColor(color)}
               style={{
                 backgroundColor: color,
-                color: color == "black" ? "white" : "black",
+                color: color == "Black" ? "white" : "black",
               }}
               className="p-2 border-gray border-2 rounded-lg mx-1"
               key={index}
